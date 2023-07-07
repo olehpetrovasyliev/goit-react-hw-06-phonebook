@@ -1,6 +1,5 @@
 import { phonebookReducer } from './slice';
 import { configureStore } from '@reduxjs/toolkit';
-import { useSelector } from 'react-redux';
 
 import {
   persistStore,
