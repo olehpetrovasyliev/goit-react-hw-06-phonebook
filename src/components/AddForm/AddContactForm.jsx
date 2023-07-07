@@ -3,32 +3,23 @@ import { StyledAddForm } from './AddForm.styled';
 
 import { AddContactInput } from './AddFormInpt/AddFormInput';
 import { AddContactBtn } from './AddFormInpt/AddFormInput.styled';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addContact } from 'redux/slice';
 
 export const AddContactForm = () => {
   const dispatch = useDispatch();
 
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
-
-  const contacts = useSelector(state => state.contacts);
-
-  // const test = useSelector(state => state);
+  const [contact, setContact] = useState({ name: '', number: '' });
 
   const handleChange = ({ target }) => {
-    if (target.name === 'name') {
-      setName(target.value);
-    } else if (target.name === 'number') {
-      setNumber(target.value);
-    }
+    setContact(prev => ({ ...prev, [target.name]: target.value }));
+    console.log(contact);
   };
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(addContact({ name, number }));
-    // console.log(test);
-    setName('');
-    setNumber('');
+    dispatch(addContact(contact));
+
+    setContact({ name: '', number: '' });
   };
   // console.log(contacts);
 
@@ -47,7 +38,7 @@ export const AddContactForm = () => {
             "Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           }
           cb={handleChange}
-          value={name}
+          value={contact.name}
         />
       </label>
       <label>
@@ -62,7 +53,7 @@ export const AddContactForm = () => {
             'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'
           }
           cb={handleChange}
-          value={number}
+          value={contact.number}
         />
       </label>
       <AddContactBtn type="submit">Add contact</AddContactBtn>

@@ -4,8 +4,6 @@ import { ContactsList } from 'components/ContactsList/ContactsList';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const App = () => {
-  const dispatch = useDispatch();
-
   const contacts = useSelector(state => state.contacts);
 
   return (
