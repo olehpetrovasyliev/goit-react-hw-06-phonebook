@@ -1,28 +1,37 @@
 import { useState } from 'react';
 import { StyledAddForm } from './AddForm.styled';
-// import propTypes from 'prop-types';
+
 import { AddContactInput } from './AddFormInpt/AddFormInput';
 import { AddContactBtn } from './AddFormInpt/AddFormInput.styled';
-import { INIT_STATE } from 'INIT_STATE';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from 'redux/slice';
 
-export const AddContactForm = ({ onSubmit }) => {
-  // const [name, setName] = useState(' ');
-  // const [number, setNumber] = useState(' ');
-  const [userData, setUserData] = useState({ ...INIT_STATE });
-  const { name, number } = userData;
-  const handleChange = e => {
-    // console.log(1);
-    const { name, value } = e.target;
-    setUserData(prev => ({ ...prev, [name]: value }));
-    console.log(userData);
+export const AddContactForm = () => {
+  const dispatch = useDispatch();
+
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
+
+  const contacts = useSelector(state => state.contacts);
+
+  // const test = useSelector(state => state);
+
+  const handleChange = ({ target }) => {
+    if (target.name === 'name') {
+      setName(target.value);
+    } else if (target.name === 'number') {
+      setNumber(target.value);
+    }
   };
   const handleSubmit = e => {
     e.preventDefault();
-    // console.log(1);
-    onSubmit(userData);
-    console.log(1);
-    setUserData({ ...INIT_STATE });
+    dispatch(addContact({ name, number }));
+    // console.log(test);
+    setName('');
+    setNumber('');
   };
+  // console.log(contacts);
+
   return (
     <StyledAddForm onSubmit={handleSubmit}>
       <label>
