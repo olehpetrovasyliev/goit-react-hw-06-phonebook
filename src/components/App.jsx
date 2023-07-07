@@ -1,7 +1,7 @@
 import { Filter } from 'components/Filter/Filter';
 import { AddContactForm } from 'components/AddForm/AddContactForm';
 import { ContactsList } from 'components/ContactsList/ContactsList';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 export const App = () => {
   const contacts = useSelector(state => state.contacts);
