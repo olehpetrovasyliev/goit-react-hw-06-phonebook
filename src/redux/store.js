@@ -1,5 +1,6 @@
 import { phonebookReducer } from './slice';
 import { configureStore } from '@reduxjs/toolkit';
+import { useSelector } from 'react-redux';
 
 import {
   persistStore,
@@ -12,11 +13,13 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+// import { contacts } from './selectors';
 
 const persistConfig = {
   key: 'root',
   version: 1,
   storage,
+  whitelist: ['contacts'],
 };
 
 const persistedReducer = persistReducer(persistConfig, phonebookReducer);

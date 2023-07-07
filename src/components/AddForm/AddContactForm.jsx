@@ -5,10 +5,11 @@ import { AddContactInput } from './AddFormInpt/AddFormInput';
 import { AddContactBtn } from './AddFormInpt/AddFormInput.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/slice';
+import { selectContacts } from 'redux/selectors';
 
 export const AddContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(selectContacts);
   const [contact, setContact] = useState({ name: '', number: '' });
 
   const handleChange = ({ target }) => {

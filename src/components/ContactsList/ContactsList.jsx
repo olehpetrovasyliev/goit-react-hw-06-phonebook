@@ -6,11 +6,12 @@ import {
 } from './ContactsList.styled';
 
 import { delContact } from 'redux/slice';
+import { selectContacts, selectFilter } from 'redux/selectors';
 
 export const ContactsList = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts);
-  const filter = useSelector(state => state.filter);
+  const contacts = useSelector(selectContacts);
+  const filter = useSelector(selectFilter);
 
   // console.log(contacts);
   const flteredContacts = contacts.filter(({ name }) =>
