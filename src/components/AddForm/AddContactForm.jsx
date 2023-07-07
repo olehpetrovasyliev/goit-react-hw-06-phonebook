@@ -3,25 +3,27 @@ import { StyledAddForm } from './AddForm.styled';
 
 import { AddContactInput } from './AddFormInpt/AddFormInput';
 import { AddContactBtn } from './AddFormInpt/AddFormInput.styled';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/slice';
 
 export const AddContactForm = () => {
   const dispatch = useDispatch();
-
+  const contacts = useSelector(state => state.contacts);
   const [contact, setContact] = useState({ name: '', number: '' });
 
   const handleChange = ({ target }) => {
     setContact(prev => ({ ...prev, [target.name]: target.value }));
-    console.log(contact);
   };
   const handleSubmit = e => {
     e.preventDefault();
+    if (contacts.some(c => c.name === e.target.name.value)) {
+      return alert('Contact already exists');
+    }
+
     dispatch(addContact(contact));
 
     setContact({ name: '', number: '' });
   };
-  // console.log(contacts);
 
   return (
     <StyledAddForm onSubmit={handleSubmit}>
